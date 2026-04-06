@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConnectX — Crystal Clear Video Calls</title>
+    <meta name="description"
+        content="ConnectX — Experience seamless, crystal-clear video calls with friends, family, and teams. Free, secure, and beautifully designed.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Animated background blobs -->
+    <div class="bg-blobs" aria-hidden="true">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span class="logo-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                        <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                    </svg>
+                </span>
+                Connect<span class="logo-accent">X</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#stats">Why Us</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+                <li><a href="call.html" class="nav-call-link">📹 Video Call</a></li>
+                <li><a href="#cta">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="btn btn-ghost" id="loginBtn">Log In</button>
+                <button class="btn btn-primary" id="signupBtn">Sign Up Free</button>
+            </div>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#stats">Why Us</a></li>
+            <li><a href="#testimonials">Reviews</a></li>
+            <li><a href="#cta">Contact</a></li>
+            <li><a href="#" class="btn btn-primary" style="display:inline-block;margin-top:.5rem;">Sign Up Free</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-badge">✦ Built-in noise cancellation</div>
+            <h1>Video Calls,<br><span class="gradient-text">Reimagined.</span></h1>
+            <p class="hero-subtitle">Crystal-clear video, ultra-low latency, end-to-end encryption. Connect with anyone,
+                anywhere — beautifully.</p>
+            <div class="hero-buttons">
+                <a href="call.html" class="btn btn-primary btn-lg">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                        <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                    </svg>
+                    Start a Call
+                </a>
+                <a href="#features" class="btn btn-outline btn-lg">Learn More</a>
+            </div>
+            <div class="hero-trust">
+                <div class="avatar-stack">
+                    <div class="avatar" style="background: #3d9b8f;">A</div>
+                    <div class="avatar" style="background: #d4a257;">B</div>
+                    <div class="avatar" style="background: #5cb88a;">C</div>
+                    <div class="avatar" style="background: #2c7a70;">D</div>
+                </div>
+                <span>Trusted by <strong>2M+</strong> users worldwide</span>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="video-grid-mockup">
+                <div class="vid-card vid-1">
+                    <div class="vid-avatar">👩‍💻</div>
+                    <span class="vid-name">Sarah</span>
+                    <span class="vid-status live"></span>
+                </div>
+                <div class="vid-card vid-2">
+                    <div class="vid-avatar">👨‍🎨</div>
+                    <span class="vid-name">James</span>
+                    <span class="vid-status live"></span>
+                </div>
+                <div class="vid-card vid-3">
+                    <div class="vid-avatar">👩‍🔬</div>
+                    <span class="vid-name">Priya</span>
+                    <span class="vid-status live"></span>
+                </div>
+                <div class="vid-card vid-4">
+                    <div class="vid-avatar">👨‍🚀</div>
+                    <span class="vid-name">Alex</span>
+                    <span class="vid-status live"></span>
+                </div>
+                <div class="mockup-toolbar">
+                    <span class="toolbar-dot red"></span>
+                    <span class="toolbar-dot yellow"></span>
+                    <span class="toolbar-dot green"></span>
+                    <span class="toolbar-label">ConnectX Meeting</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-tag">Features</span>
+                <h2>Everything you need for <span class="gradient-text">perfect calls</span></h2>
+                <p>Built from the ground up to deliver the best video calling experience.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon" style="--accent: #3d9b8f;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2" />
+                            <line x1="8" y1="21" x2="16" y2="21" />
+                            <line x1="12" y1="17" x2="12" y2="21" />
+                        </svg>
+                    </div>
+                    <h3>HD Video</h3>
+                    <p>Up to 4K resolution with adaptive bitrate streaming for crystal-clear visuals.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="--accent: #d4a257;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                            <line x1="12" y1="19" x2="12" y2="23" />
+                            <line x1="8" y1="23" x2="16" y2="23" />
+                        </svg>
+                    </div>
+                    <h3>AI Noise Cancel</h3>
+                    <p>AI-powered noise cancellation removes background distractions in real time.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="--accent: #5cb88a;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" />
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                        </svg>
+                    </div>
+                    <h3>End-to-End Encrypted</h3>
+                    <p>Military-grade encryption keeps every conversation private and secure.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="--accent: #4da3a0;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                    </div>
+                    <h3>Group Calls</h3>
+                    <p>Host up to 100 participants with screen sharing and live reactions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="--accent: #c45c5c;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <polyline points="12 6 12 12 16 14" />
+                        </svg>
+                    </div>
+                    <h3>Ultra-Low Latency</h3>
+                    <p>Sub-100ms latency powered by a global edge network of 200+ servers.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="--accent: #d4a257;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                        </svg>
+                    </div>
+                    <h3>Live Chat</h3>
+                    <p>In-call messaging with emoji reactions, file sharing, and threaded replies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats" id="stats">
+        <div class="section-container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number" data-target="2">0</span><span class="stat-suffix">M+</span>
+                    <span class="stat-label">Active Users</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="99">0</span><span class="stat-suffix">.9%</span>
+                    <span class="stat-label">Uptime SLA</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="50">0</span><span class="stat-suffix">ms</span>
+                    <span class="stat-label">Avg Latency</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="200">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">Edge Servers</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-tag">Testimonials</span>
+                <h2>Loved by <span class="gradient-text">teams everywhere</span></h2>
+                <p>See what our users have to say about ConnectX.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p>"ConnectX completely replaced our old video tool. The quality is insane and the UI is gorgeous."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background: #3d9b8f;">M
+                        </div>
+                        <div>
+                            <strong>Maya Chen</strong>
+                            <span>Product Lead, Stripe</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p>"The noise cancellation is magic. I can take calls from a coffee shop and nobody can tell."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background: #d4a257;">R
+                        </div>
+                        <div>
+                            <strong>Raj Patel</strong>
+                            <span>Engineer, Google</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p>"We switched our entire 500-person company to ConnectX. Best decision we made this year."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background: #5cb88a;">L
+                        </div>
+                        <div>
+                            <strong>Lisa Wang</strong>
+                            <span>CTO, Notion</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="cta">
+        <div class="section-container">
+            <div class="cta-card">
+                <h2>Ready to connect?</h2>
+                <p>Join millions of users making crystal-clear video calls every day. It's free to get started.</p>
+                <div class="hero-buttons" style="justify-content: center;">
+                    <a href="call.html" class="btn btn-primary btn-lg">Start a Video Call</a>
+                    <button class="btn btn-outline btn-lg">Talk to Sales</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        Connect<span class="logo-accent">X</span>
+                    </a>
+                    <p>Crystal-clear video calls for everyone. Built with love and cutting-edge technology.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Twitter">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="GitHub">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="LinkedIn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Security</a></li>
+                        <li><a href="#">Enterprise</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">Status</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ConnectX. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

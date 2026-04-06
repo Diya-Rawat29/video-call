@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConnectX — Video Call</title>
+    <meta name="description"
+        content="Start or join a group video call using a shared code. Crystal-clear, secure, and seamless.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="call.css">
+    <!-- PeerJS for WebRTC signaling -->
+    <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Animated background blobs -->
+    <div class="bg-blobs" aria-hidden="true">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="scrolled">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                        <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                    </svg>
+                </span>
+                Connect<span class="logo-accent">X</span>
+            </a>
+            <div class="nav-actions">
+                <a href="index.html" class="btn btn-ghost">← Back to Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ============================================ -->
+    <!-- LOBBY SCREEN — Enter / Generate Code        -->
+    <!-- ============================================ -->
+    <section class="call-lobby" id="callLobby">
+        <div class="lobby-container">
+            <div class="lobby-card">
+                <div class="lobby-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="url(#lobbyGrad)"
+                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <defs>
+                            <linearGradient id="lobbyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#3d9b8f" />
+                                <stop offset="100%" stop-color="#d4a257" />
+                            </linearGradient>
+                        </defs>
+                        <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                        <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                    </svg>
+                </div>
+                <h1>Start or Join a <span class="gradient-text">Group Call</span></h1>
+                <p class="lobby-subtitle">Share a code with your team. Everyone enters the same code
+                    to connect in a group video call — up to 8 people!</p>
+
+                <!-- Code Input Area -->
+                <div class="code-section">
+                    <label for="callCode" class="code-label">Your Call Code</label>
+                    <div class="code-input-wrapper">
+                        <input type="text" id="callCode" class="code-input" placeholder="Enter or generate a code..."
+                            maxlength="20" autocomplete="off" spellcheck="false">
+                        <button class="btn btn-ghost code-gen-btn" id="generateCodeBtn" title="Generate random code">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="1 4 1 10 7 10"></polyline>
+                                <polyline points="23 20 23 14 17 14"></polyline>
+                                <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15">
+                                </path>
+                            </svg>
+                        </button>
+                        <button class="btn btn-ghost code-copy-btn" id="copyCodeBtn" title="Copy code">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="code-hint">💡 Share this code with everyone who wants to join</p>
+                </div>
+
+                <!-- Name Input -->
+                <div class="code-section">
+                    <label for="userName" class="code-label">Your Display Name</label>
+                    <div class="code-input-wrapper">
+                        <input type="text" id="userName" class="code-input name-input" placeholder="Enter your name..."
+                            maxlength="20" autocomplete="off" spellcheck="false">
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="lobby-actions">
+                    <button class="btn btn-primary btn-lg lobby-btn" id="joinCallBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                            <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                        </svg>
+                        Join Call
+                    </button>
+                </div>
+
+                <!-- Camera Preview -->
+                <div class="preview-section">
+                    <div class="preview-video-wrapper">
+                        <video id="previewVideo" autoplay muted playsinline></video>
+                        <div class="preview-overlay" id="previewOverlay">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                            </svg>
+                            <span>Camera preview will appear here</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-ghost preview-toggle" id="togglePreviewBtn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                            <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                        </svg>
+                        Toggle Camera Preview
+                    </button>
+                </div>
+
+                <!-- Status -->
+                <div class="lobby-status" id="lobbyStatus"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CALL SCREEN — Active Video Call              -->
+    <!-- ============================================ -->
+    <section class="call-screen" id="callScreen">
+        <!-- Dynamic Video Grid -->
+        <div class="call-videos" id="videoGrid">
+            <!-- Local Video (always present) -->
+            <div class="video-tile" id="localTile" data-peer="local">
+                <video id="localVideo" autoplay muted playsinline></video>
+                <div class="video-name-tag" id="localNameTag">You</div>
+                <div class="video-badge local-badge">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+                        <circle cx="12" cy="12" r="10" />
+                    </svg>
+                </div>
+                <button class="fullscreen-btn" title="Toggle Fullscreen">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Remote tiles are appended dynamically -->
+        </div>
+
+        <!-- Call Info Bar -->
+        <div class="call-info-bar" id="callInfoBar">
+            <div class="call-info-left">
+                <span class="call-code-display">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" />
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                    </svg>
+                    Code: <strong id="activeCallCode">—</strong>
+                </span>
+                <span class="participant-count" id="participantCount">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
+                    <span id="participantNum">1</span> participant(s)
+                </span>
+            </div>
+            <div class="call-info-center">
+                <span class="call-timer" id="callTimer">00:00</span>
+            </div>
+            <div class="call-info-right">
+                <span class="call-quality" id="callQuality">
+                    <span class="quality-dot"></span> Connected
+                </span>
+            </div>
+        </div>
+
+        <!-- Call Controls -->
+        <div class="call-controls" id="callControls">
+            <button class="control-btn" id="toggleMicBtn" title="Toggle Microphone">
+                <svg class="icon-on" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                    <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                    <line x1="12" y1="19" x2="12" y2="23" />
+                    <line x1="8" y1="23" x2="16" y2="23" />
+                </svg>
+                <svg class="icon-off" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="1" y1="1" x2="23" y2="23" />
+                    <path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6" />
+                    <path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2c0 .76-.12 1.49-.34 2.18" />
+                    <line x1="12" y1="19" x2="12" y2="23" />
+                    <line x1="8" y1="23" x2="16" y2="23" />
+                </svg>
+                <span class="control-label">Mic</span>
+            </button>
+            <button class="control-btn" id="toggleCamBtn" title="Toggle Camera">
+                <svg class="icon-on" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                    <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                </svg>
+                <svg class="icon-off" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M16 16v1a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2m5.66 0H14a2 2 0 0 1 2 2v3.34l1 1L23 7v10" />
+                    <line x1="1" y1="1" x2="23" y2="23" />
+                </svg>
+                <span class="control-label">Camera</span>
+            </button>
+            <button class="control-btn" id="switchCamBtn" title="Switch Camera">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M11 19H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5" />
+                    <path d="M13 5h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-5" />
+                    <polyline points="16 3 19 6 16 9" />
+                    <polyline points="8 15 5 18 8 21" />
+                </svg>
+                <span class="control-label">Flip</span>
+            </button>
+            <button class="control-btn" id="screenShareBtn" title="Share Screen">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="3" width="20" height="14" rx="2" />
+                    <line x1="8" y1="21" x2="16" y2="21" />
+                    <line x1="12" y1="17" x2="12" y2="21" />
+                </svg>
+                <span class="control-label">Share</span>
+            </button>
+            <button class="control-btn end-call-btn" id="endCallBtn" title="End Call">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                        d="M10.68 13.31a16 16 0 0 0 3.41 2.6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91" />
+                    <line x1="23" y1="1" x2="1" y2="23" />
+                </svg>
+                <span class="control-label">End</span>
+            </button>
+        </div>
+    </section>
+
+    <script src="call.js"></script>
+</body>
+
+</html>
